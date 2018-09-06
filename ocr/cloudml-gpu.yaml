@@ -1,0 +1,9 @@
+trainingInput:
+  scaleTier: CUSTOM
+#  standard_gpu: 1 NVIDIA Tesla K80 GPU
+#  complex_model_m_gpu: 4 NVIDIA Tesla K80 GPUs
+#  complex_model_l_gpu: 8 NVIDIA Tesla K80 GPUs
+#  standard_p100: 1 NVIDIA Tesla P100 GPU (Beta)
+#  complex_model_m_p100: 4 NVIDIA Tesla P100 GPUs (Beta)
+  masterType: standard_gpu
+  runtimeVersion: "1.9"
