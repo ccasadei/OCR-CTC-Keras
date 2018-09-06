@@ -80,6 +80,7 @@ ____
 | 1.678 | 0.4140 | 0.7326 **dopo generalizzazione**|
 
 **GRU5 (versione simile a GRU ma con maggiore larghezza temporale e parte RNN semplificata)**
+
 | Val. Loss | Acc. Media | Acc. Media Cifre |
 | ---------:| ----------:| ----------------:|
 | 3.747 | 0.2160 | 0.5810 |
