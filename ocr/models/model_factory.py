@@ -5,10 +5,11 @@ MODEL_GRU2 = "GRU2"
 MODEL_GRU3 = "GRU3"
 MODEL_GRU4 = "GRU4"
 MODEL_GRU5 = "GRU5"
+MODEL_GRU6 = "GRU6"
 
 
 from keras import backend as K
-from ocr.models import model_LSTM, model_GRU, model_GRU2, model_GRU3, model_GRU4, model_GRU5
+from ocr.models import model_LSTM, model_GRU, model_GRU2, model_GRU3, model_GRU4, model_GRU5, model_GRU6
 from ocr.utils import parameter
 
 K.set_learning_phase(0)
@@ -28,6 +29,8 @@ def get_model_and_network(training):
         model = model_GRU4.Model_GRU4()
     elif parameter.model_type == MODEL_GRU5:
         model = model_GRU5.Model_GRU5()
+    elif parameter.model_type == MODEL_GRU6:
+        model = model_GRU6.Model_GRU6()
     else:
         raise Exception("Tipo modello '" + parameter.model_type + "' non riconosciuto.")
 

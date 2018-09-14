@@ -13,11 +13,15 @@ def _bytes_feature(value):
 
 # prepara il tfrecord
 def prepara_dataset(tipo, path_src, batch_size):
+    tfrecord_fname = os.path.join(path_src, "dataset.tfrecord")
+    if os.path.exists(tfrecord_fname):
+        os.remove(tfrecord_fname)
+
     # prepara il text generator per leggere velocemente il dataset
     gen = image_generator.TextImageGenerator(path_src, batch_size=batch_size, downsample_factor=None, grayscale=None, img_wh=None)
 
     # prepara il file tfrecord
-    writer = tf.python_io.TFRecordWriter(os.path.join(path_src, "dataset.tfrecord"))
+    writer = tf.python_io.TFRecordWriter(tfrecord_fname)
 
     print("Dataset di", tipo, ":", gen.n, "immagini da elaborare", flush=True)
     # per ogni immagine letta dall'image generator...

@@ -72,18 +72,7 @@ ____
 | 6.736 | 0.2568 | 0.6558 |
 | 3.844 | 0.3934 | 0.7478 |
 | 3.095 | 0.4900 | 0.7938 |
-| 2.456 | 0.5400 | 0.8643 |
-| 2.433 | 0.5860 | 0.8377 |
-| 2.271 | 0.4860 | 0.7997 **dopo generalizzazione** |
-| 2.221 | 0.6120 | 0.8457 |
-| 2.212 | 0.6440 | 0.8569 |
-| 1.678 | 0.4140 | 0.7326 **dopo generalizzazione**|
-
-**GRU5 (versione simile a GRU ma con maggiore larghezza temporale e parte RNN semplificata)**
-
-| Val. Loss | Acc. Media | Acc. Media Cifre |
-| ---------:| ----------:| ----------------:|
-| 3.747 | 0.2160 | 0.5810 |
+| 2.666 | 0.5400 | 0.8226 |
 
 
 **NOTA**: il modello GRU è stato selezionato come il più promettente
@@ -127,3 +116,20 @@ ____
 | 6.250 | 0.1913 | 0.6391 |
 | 5.537 | 0.2022 | 0.6254 |
 
+**GRU5 (versione simile a GRU ma con maggiore larghezza temporale e parte RNN semplificata)**
+
+| Val. Loss | Acc. Media | Acc. Media Cifre |
+| ---------:| ----------:| ----------------:|
+| 3.747 | 0.2160 | 0.5810 |
+
+____
+
+**Risultati su Dataset reale di "Service" con immagini "achor box"**
+
+**GRU6** 
+
+*(modello con 12 simboli invece di 14, maggiore dimensione input, maggior numero neuroni CNN&rarr;RNN)*
+
+| Val. Loss | Acc. Media | Acc. Media Cifre |
+| ---------:| ----------:| ----------------:|
+| 3.507 | 0.4006 | 0.7148 |

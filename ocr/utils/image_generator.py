@@ -156,7 +156,7 @@ class TextImageGenerator:
     # trasforma il testo in label
     @staticmethod
     def text_to_labels(text):
-        return list(map(lambda x: parameter.letters.index(x), text))
+        return list(map(lambda x: parameter.letters.index(x), text.replace("-", ".").replace(" ", "")))  # TODO: togliere replace per "classic"
 
     # se la lunghezza non raggiunge quella massima, aggiungo una classe blank
     @staticmethod

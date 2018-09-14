@@ -9,7 +9,7 @@ from ocr.models.model_BASE import Model_BASE
 from ocr.utils import parameter
 
 
-class Model_GRU(Model_BASE):
+class Model_GRU6(Model_BASE):
     # preparo il modello con GRU (monocromatico)
     def get_model(self, training):
         img_wh = self.get_input_image_size()
@@ -18,25 +18,30 @@ class Model_GRU(Model_BASE):
         inputs = Input(name='the_input', shape=input_shape, dtype='float32')  # (None, 128, 64, 1)
 
         # estrattore convoluzionale (VGG)
-        inner = Conv2D(64, (3, 3), padding='same', name='conv1', kernel_initializer='he_normal')(inputs)  # (None, 128, 64, 64)
+        inner = Conv2D(64, (3, 3), padding='same', name='conv1', kernel_initializer='he_normal')(
+            inputs)  # (None, 128, 64, 64)
         inner = BatchNormalization()(inner)
         inner = Activation('relu')(inner)
         inner = MaxPooling2D(pool_size=(2, 2), name='max1')(inner)  # (None,64, 32, 64)
 
-        inner = Conv2D(128, (3, 3), padding='same', name='conv2', kernel_initializer='he_normal')(inner)  # (None, 64, 32, 128)
+        inner = Conv2D(128, (3, 3), padding='same', name='conv2', kernel_initializer='he_normal')(
+            inner)  # (None, 64, 32, 128)
         inner = BatchNormalization()(inner)
         inner = Activation('relu')(inner)
         inner = MaxPooling2D(pool_size=(2, 2), name='max2')(inner)  # (None, 32, 16, 128)
 
-        inner = Conv2D(256, (3, 3), padding='same', name='conv3', kernel_initializer='he_normal')(inner)  # (None, 32, 16, 256)
+        inner = Conv2D(256, (3, 3), padding='same', name='conv3', kernel_initializer='he_normal')(
+            inner)  # (None, 32, 16, 256)
         inner = BatchNormalization()(inner)
         inner = Activation('relu')(inner)
-        inner = Conv2D(256, (3, 3), padding='same', name='conv4', kernel_initializer='he_normal')(inner)  # (None, 32, 16, 256)
+        inner = Conv2D(256, (3, 3), padding='same', name='conv4', kernel_initializer='he_normal')(
+            inner)  # (None, 32, 16, 256)
         inner = BatchNormalization()(inner)
         inner = Activation('relu')(inner)
-        inner = MaxPooling2D(pool_size=(1, 2), name='max3')(inner)  # (None, 32, 8, 256)
+        inner = MaxPooling2D(pool_size=(2, 2), name='max3')(inner)  # (None, 32, 8, 256)
 
-        inner = Conv2D(512, (3, 3), padding='same', name='conv5', kernel_initializer='he_normal')(inner)  # (None, 32, 8, 512)
+        inner = Conv2D(512, (3, 3), padding='same', name='conv5', kernel_initializer='he_normal')(
+            inner)  # (None, 32, 8, 512)
         inner = BatchNormalization()(inner)
         inner = Activation('relu')(inner)
         inner = Conv2D(512, (3, 3), padding='same', name='conv6')(inner)  # (None, 32, 8, 512)
@@ -44,14 +49,15 @@ class Model_GRU(Model_BASE):
         inner = Activation('relu')(inner)
         inner = MaxPooling2D(pool_size=(1, 2), name='max4')(inner)  # (None, 32, 4, 512)
 
-        inner = Conv2D(512, (2, 2), padding='same', kernel_initializer='he_normal', name='con7')(inner)  # (None, 32, 4, 512)
+        inner = Conv2D(512, (2, 2), padding='same', kernel_initializer='he_normal', name='con7')(
+            inner)  # (None, 32, 4, 512)
         inner = BatchNormalization()(inner)
         inner = Activation('relu')(inner)
 
         # passo da CNN a RNN
         # il 32 in questo caso è il numero di attivazioni temporali (= img_w / downsample)
         inner = Reshape(target_shape=(32, 2048), name='reshape')(inner)  # (None, 32, 2048)
-        inner = Dense(64, activation='relu', kernel_initializer='he_normal', name='dense1')(inner)
+        inner = Dense(256, activation='relu', kernel_initializer='he_normal', name='dense1')(inner)
 
         # parte RNN
         gru_1 = GRU(512, return_sequences=True, kernel_initializer='he_normal', name='gru1')(inner)
@@ -93,7 +99,7 @@ class Model_GRU(Model_BASE):
         return True
 
     def get_downsample_factor(self):
-        return 4
+        return 8
 
     def get_input_image_size(self):
-        return (128, 64)
+        return (256, 64)

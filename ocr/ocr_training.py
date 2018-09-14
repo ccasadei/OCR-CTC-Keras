@@ -29,9 +29,13 @@ tigen_train = TextImageGenerator(parameter.train_file_path, parameter.train_batc
                                  model.get_downsample_factor(), model.isgrayscaled(),
                                  model.get_input_image_size())
 
+print("Dataset di training:", tigen_train.n, "samples", flush=True)
+
 tigen_val = TextImageGenerator(parameter.val_file_path, parameter.val_batch_size,
                                model.get_downsample_factor(), model.isgrayscaled(),
                                model.get_input_image_size())
+
+print("Dataset di validation:", tigen_val.n, "samples", flush=True)
 
 # preparo i callback
 callbacks = [
